@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="CSS/estilos.css">
+</head>
+<body onload="cargarDatosUsuario()">
+    <h1>Mi Perfil</h1>
+    <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
+
+    <form id="formPerfil">
+        <div class="form-group">
+            <label for="nombres">Nombres:</label>
+            <input type="text" id="nombres" required>
+        </div>
+
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" required>
+        </div>
+
+        <div class="form-group">
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" required readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNacimiento" required>
+        </div>
+
+        <div class="form-group">
+            <label for="claveActual">Contraseña actual (para cambios):</label>
+            <input type="password" id="claveActual">
+        </div>
+
+        <div class="form-group">
+            <label for="nuevaClave">Nueva contraseña (opcional):</label>
+            <input type="password" id="nuevaClave">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmarNuevaClave">Confirmar nueva contraseña:</label>
+            <input type="password" id="confirmarNuevaClave">
+        </div>
+
+        <button type="button" onclick="actualizarPerfil()">Guardar cambios</button>
+        <button type="button" onclick="window.location.href='inicio.html'">Volver</button>
+    </form>
+
+    <div id="mensaje" class="error"></div>
+
+    <script src="JS/App.js"></script>
+</body>
+</html>
