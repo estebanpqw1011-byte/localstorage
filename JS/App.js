@@ -60,7 +60,7 @@ function iniciarSesion(){
         return;
     }
 
-localStorage.setItem("usuarioActual", correo);
+localStorage.setItem("usuarioActivo", correo);
 window.location.href="inicio.html";
 
 
@@ -224,4 +224,78 @@ document.getElementById('nombres').value = datos.nombres || '';
 document.getElementById('apellidos').value = datos.apellidos || '';
 document.getElementById('correo').value = datos.correo || '';
 document.getElementById('fechaNacimiento').value = datos.fechaNacimiento || '';
+}
+
+function showMessage(text, isError = false) {
+    const el = document.getElementById('mensaje');
+    if (el) {
+        el.textContent = text;
+        el.style.color = isError ? 'red' : 'green';
+        setTimeout(() => { el.textContent = ''; }, 4000);
+    } else {
+        alert(text);
+    }
+}
+
+function actualizarPerfil() {
+    let correoActivo = localStorage.getItem('usuarioActivo');
+    if (!correoActivo) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    let datos = JSON.parse(localStorage.getItem('usuario_' + correoActivo));
+    if (!datos) {
+        window.location.href = 'index.html';
+        return;
+    }
+
+    const nombres = document.getElementById('nombres').value.trim();
+    const apellidos = document.getElementById('apellidos').value.trim();
+    const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+    const claveActual = document.getElementById('claveActual').value;
+    const nuevaClave = document.getElementById('nuevaClave').value;
+    const confirmarNuevaClave = document.getElementById('confirmarNuevaClave').value;
+
+    // Si se solicita cambiar la contraseña, validar correctamente
+    if (nuevaClave || confirmarNuevaClave) {
+        if (!claveActual) {
+            showMessage('Ingresa la contraseña actual para cambiar la contraseña', true);
+            return;
+        }
+        if (claveActual !== datos.clave) {
+            showMessage('La contraseña actual es incorrecta', true);
+            return;
+        }
+        if (nuevaClave.length < 8) {
+            showMessage('La nueva contraseña debe tener al menos 8 caracteres', true);
+            return;
+        }
+        if (nuevaClave !== confirmarNuevaClave) {
+            showMessage('La nueva contraseña y su confirmación no coinciden', true);
+            return;
+        }
+        datos.clave = nuevaClave;
+    }
+
+    // Actualizar otros campos
+    datos.nombres = nombres || datos.nombres;
+    datos.apellidos = apellidos || datos.apellidos;
+    datos.fechaNacimiento = fechaNacimiento || datos.fechaNacimiento;
+
+    // Guardar cambios
+    localStorage.setItem('usuario_' + correoActivo, JSON.stringify(datos));
+
+    // Limpiar campos de contraseña en el formulario
+    document.getElementById('claveActual').value = '';
+    document.getElementById('nuevaClave').value = '';
+    document.getElementById('confirmarNuevaClave').value = '';
+
+    showMessage('Perfil actualizado correctamente', false);
+
+    // Actualizar bienvenida si existe en la página actual
+    const mensajeBienvenida = document.getElementById('mensajeBienvenida');
+    if (mensajeBienvenida) {
+        mensajeBienvenida.innerHTML = `¡Bienvenido/a, <a href="perfil.html">${datos.nombres}</a>!`;
+    }
 }

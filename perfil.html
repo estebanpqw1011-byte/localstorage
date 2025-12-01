@@ -4,54 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="CSS/estilos.css">
 </head>
-<body onload="cargarDatosUsuario()">
-    <h1>Mi Perfil</h1>
-    <button type="button" onclick="cerrarSesion()">Cerrar sesión</button>
 
-    <form id="formPerfil">
-        <div class="form-group">
-            <label for="nombres">Nombres:</label>
-            <input type="text" id="nombres" required>
+<body class="bg-light p-4" onload="cargarDatosUsuario()">
+
+    <h1 class="text-primary fw-bold mb-4">Mi Perfil</h1>
+
+    <button type="button" onclick="cerrarSesion()" class="btn btn-primary mb-4">Cerrar sesión</button>
+
+    <form id="formPerfil" class="border p-4 bg-white shadow-sm rounded">
+
+        <div class="form-group mb-3">
+            <label for="nombres" class="fw-bold text-primary">Nombres:</label>
+            <input type="text" id="nombres" required class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" required>
+        <div class="form-group mb-3">
+            <label for="apellidos" class="fw-bold text-primary">Apellidos:</label>
+            <input type="text" id="apellidos" required class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" required readonly>
+        <div class="form-group mb-3">
+            <label for="correo" class="fw-bold text-primary">Correo electrónico:</label>
+            <input type="email" id="correo" required readonly class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-            <input type="date" id="fechaNacimiento" required>
+        <div class="form-group mb-3">
+            <label for="fechaNacimiento" class="fw-bold text-primary">Fecha de Nacimiento:</label>
+            <input type="date" id="fechaNacimiento" required class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="claveActual">Contraseña actual (para cambios):</label>
-            <input type="password" id="claveActual">
+        <div class="form-group mb-3">
+            <label for="claveActual" class="fw-bold text-primary">Contraseña actual (para cambios):</label>
+            <input type="password" id="claveActual" class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="nuevaClave">Nueva contraseña (opcional):</label>
-            <input type="password" id="nuevaClave">
+        <div class="form-group mb-3">
+            <label for="nuevaClave" class="fw-bold text-primary">Nueva contraseña (opcional):</label>
+            <input type="password" id="nuevaClave" class="form-control">
         </div>
 
-        <div class="form-group">
-            <label for="confirmarNuevaClave">Confirmar nueva contraseña:</label>
-            <input type="password" id="confirmarNuevaClave">
+        <div class="form-group mb-4">
+            <label for="confirmarNuevaClave" class="fw-bold text-primary">Confirmar nueva contraseña:</label>
+            <input type="password" id="confirmarNuevaClave" class="form-control">
         </div>
 
-        <button type="button" onclick="actualizarPerfil()">Guardar cambios</button>
-        <button type="button" onclick="window.location.href='inicio.html'">Volver</button>
+        <button type="button" onclick="actualizarPerfil()" class="btn btn-primary w-100 mb-2">
+            Guardar cambios
+        </button>
+
+        <button type="button" onclick="window.location.href='inicio.html'" class="btn btn-outline-primary w-100">
+            Volver
+        </button>
     </form>
 
-    <div id="mensaje" class="error"></div>
+    <div id="mensaje" class="error mt-3 text-danger fw-bold"></div>
 
     <script src="JS/App.js"></script>
 </body>
 </html>
+
